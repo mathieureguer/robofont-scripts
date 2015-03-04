@@ -158,7 +158,10 @@ class uderzorPanel():
         self.updateView("dummmyInfo")
         
     def decreaseIncrements(self, sender):
-        self.uderzor.increments -= 1 
+        if self.uderzor.increments <= 2:
+            self.uderzor.increments = 2
+        else:
+            self.uderzor.increments -= 1 
         self.updateView("dummmyInfo")
 
     def outlineCallback(self, sender):
