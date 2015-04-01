@@ -81,10 +81,12 @@ class uderzorPanel():
         self.uderzor.anchorName = anchorDefault
         
         self.color = NSColor.colorWithCalibratedRed_green_blue_alpha_(colorDefault[0], colorDefault[1], colorDefault[2], colorDefault[3])
-        
+        self.black = NSColor.colorWithCalibratedRed_green_blue_alpha_(O, O, O, 1)
         self.drawAsterisk()
         
         addObserver(self, "updateView", "drawBackground")
+        addObserver(self, "drawPreview", "drawPreview")
+
 
         
     def panel(self):
@@ -136,22 +138,27 @@ class uderzorPanel():
     # callbacks
     def updateView(self, info):
         self.drawAsterisk()
-        self.showPreview()
+        self.fillAsterisk(self.color)
+        
+    def drawPreview(self, info):
+        self.drawAsterisk()
+        self.fillAsterisk(self.black)
     
     def drawAsterisk(self):
         if CurrentGlyph():
             self.output = CurrentGlyph().copy()
             self.uderzor.radialDuplicate(self.output)
-        
-    def showPreview(self):
-        if self.output :
-            self.color.set()
+    
+    def fillAsterisk(self, color):
+    	if self.output :
+            color.set()
             self.previewPath = self.output.naked().getRepresentation("defconAppKit.NSBezierPath")
             self.previewPath.fill()
             UpdateCurrentGlyphView()
     
     def windowCloseCallback(self, sender):
         removeObserver(self, "drawBackground")
+        removeObserver(self, "drawPreview")
                 
     def increaseIncrements(self, sender):
         self.uderzor.increments += 1
