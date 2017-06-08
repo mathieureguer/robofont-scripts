@@ -81,7 +81,7 @@ class uderzorPanel():
         self.uderzor.anchorName = anchorDefault
         
         self.color = NSColor.colorWithCalibratedRed_green_blue_alpha_(colorDefault[0], colorDefault[1], colorDefault[2], colorDefault[3])
-        self.black = NSColor.colorWithCalibratedRed_green_blue_alpha_(O, O, O, 1)
+        self.black = NSColor.colorWithCalibratedRed_green_blue_alpha_(0, 0, 0, 1)
         self.drawAsterisk()
         
         addObserver(self, "updateView", "drawBackground")
