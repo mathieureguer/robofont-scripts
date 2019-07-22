@@ -1,5 +1,5 @@
 # Mathieu Reguer
-__version__ = 0.2
+__version__ = 0.3
 
 """
 Draw asterisks.
@@ -59,7 +59,7 @@ class uderzor():
         origin = self.getOrigin(glyph, self.anchorName)
         t = self.offsetToOriginPoint(origin)
         angle = 360.0/self.increments
-        glyph.transform(t)
+        glyph.transform(tuple(t))
 
         gBis = glyph.copy()
         a = self.anchorSearch(gBis, self.anchorName)
@@ -70,7 +70,7 @@ class uderzor():
             gBis.rotate(angle)
             glyph.appendGlyph(gBis)
         
-        glyph.transform(t.inverse())
+        glyph.transform(tuple(t.inverse()))
         
         
 class uderzorPanel():
@@ -96,7 +96,7 @@ class uderzorPanel():
         itemHeight = 50
         windowsWidth = xMargin*2 + itemHeight*2
         
-        self.w = FloatingWindow((windowsWidth, 0), "Uderzor")
+        self.w = Window((windowsWidth, 0), "Uderzor")
         self.w.bind("close", self.windowCloseCallback)
         
         currentHeight = yMargin
